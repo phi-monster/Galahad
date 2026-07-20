@@ -1,0 +1,25 @@
+# LaTeX build
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+main.log
+
+# build dirs / scratch
+/tmp_build/
+_site/
+__pycache__/
+*.pyc
+
+# os
+.DS_Store
+
+# internal working notes (not part of the release)
+.claude/
+SKELETON.md
+NUMBERS.md
+DESIGN_BRIEFS.md

@@ -1,0 +1,126 @@
+/* -------------------------------------------------------------------------
+   style.css — Galahad project page
+
+   Same linen + slate palette and Charter/JetBrains-Mono typography as
+   xn--7xa.monster (Φ(fight) Research), so the project page and the
+   collective's site feel like one body of work. Editorial, calm; the one
+   visual departure is the change-one-word demo strip.
+   ------------------------------------------------------------------------- */
+
+:root {
+  --paper:     #f5f2e9;
+  --ink:       #2a2826;
+  --ink-soft:  #6b6864;
+  --rule:      #ddd9d0;
+  --link:      #1f4870;
+  --link-hov:  #a06b4a;
+  --win:       #1b5e20;
+  --measure:   44rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria,
+               "Source Serif Pro", Georgia, serif;
+  font-feature-settings: "kern", "liga", "onum";
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+main { max-width: var(--measure); margin: 2.5rem auto 2rem; padding: 0 1.5rem; }
+p { margin: 0.7em 0; }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--link) 45%, transparent);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+a:hover { color: var(--link-hov); border-bottom-color: currentColor; }
+
+code, kbd, samp, pre {
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+/* ---- masthead ------------------------------------------------------ */
+.masthead { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+.masthead h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 0.3rem; line-height: 1.15; }
+.masthead .subtitle { font-size: 1.05rem; color: var(--ink-soft); margin: 0.2rem 0 0.9rem; font-style: italic; }
+.tagline {
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  font-size: 0.92rem; color: var(--ink); margin: 0.6rem 0 0; letter-spacing: -0.01em;
+}
+
+/* ---- link row (paper / code / model / data) ----------------------- */
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; justify-content: center; margin: 1.2rem 0 0; }
+.links a {
+  border: 1px solid var(--rule); border-radius: 4px; padding: 0.28rem 0.8rem;
+  font-size: 0.9rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 60%, #fff);
+}
+.links a:hover { border-color: var(--link-hov); color: var(--link-hov); }
+
+/* ---- section headings (small caps, echoes LaTeX scshape) ---------- */
+h2 {
+  font-size: 0.95rem; font-weight: 500; font-variant: small-caps; letter-spacing: 0.08em;
+  color: var(--ink); margin: 2.6rem 0 0.6rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--rule);
+}
+
+/* ---- the change-one-word teaser ----------------------------------- */
+.teaser { margin: 1.6rem 0 0.4rem; }
+.teaser figure { margin: 0; }
+.teaser img, .teaser video { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 4px; display: block; }
+.teaser .realrobot { margin-top: 1.2rem; }
+.teaser .realrobot video { max-width: 24rem; margin: 0 auto; }
+.teaser figcaption { font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.5rem; text-align: center; }
+.teaser .placeholder {
+  color: var(--ink-soft); font-style: italic; border: 1px dashed var(--rule); border-radius: 4px;
+  padding: 2.4rem 1rem; text-align: center; background: color-mix(in srgb, var(--paper) 50%, #fff);
+}
+
+/* ---- headline numbers --------------------------------------------- */
+.numbers { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; margin: 1.4rem 0 0.4rem; }
+.stat { text-align: center; }
+.stat .n { font-size: 1.9rem; font-weight: 600; line-height: 1; font-feature-settings: "tnum", "lnum"; }
+.stat.win .n { color: var(--win); }
+.stat .l { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.3rem; }
+
+/* ---- code block (the battery) ------------------------------------- */
+pre {
+  background: color-mix(in srgb, var(--paper) 40%, #fff); border: 1px solid var(--rule);
+  border-radius: 5px; padding: 0.9rem 1.1rem; overflow-x: auto; line-height: 1.5;
+}
+pre code { font-size: 0.85rem; }
+
+/* ---- authors ------------------------------------------------------- */
+.authors { text-align: center; margin: 0.6rem 0; }
+.authors .who { font-size: 1.02rem; }
+.authors .aff { font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.2rem; }
+.authors .eq { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.4rem; }
+
+.meta { font-style: italic; color: var(--ink-soft); font-size: 0.9rem; }
+strong { font-weight: 600; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0 1.2rem; }
+
+/* ---- footer -------------------------------------------------------- */
+footer { max-width: var(--measure); margin: 0 auto 3rem; padding: 0 1.5rem; }
+.colophon { font-size: 0.82rem; color: var(--ink-soft); text-align: center; }
+.colophon a { color: var(--ink-soft); border-bottom-color: var(--rule); }
+
+/* ---- small screens ------------------------------------------------- */
+@media (max-width: 480px) {
+  html { font-size: 17px; }
+  main { margin-top: 1.5rem; }
+  .masthead h1 { font-size: 1.7rem; }
+  .stat .n { font-size: 1.5rem; }
+}
