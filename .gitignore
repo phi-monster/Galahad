@@ -14,6 +14,11 @@ main.log
 _site/
 __pycache__/
 *.pyc
+# python packaging artifacts (galahad/ is pip-installable)
+.venv/
+*.egg-info/
+build/
+dist/
 
 # os
 .DS_Store
