@@ -1,7 +1,7 @@
 # Galahad
 
 > **Galahad and the Siege Perilous: A Cheat-Proof Trial for Language Grounding, and the First Policy to Survive It**
-> **[Project page](https://galahad.xn--7xa.monster/)** · Paper · model · dataset — *remaining links land with the arXiv posting.*
+> **[Project page](https://galahad.xn--7xa.monster/)** · Paper · **[Model](https://huggingface.co/phi-monster/Galahad)** · **[Datasets](https://huggingface.co/phi-monster)** — *paper link lands with the arXiv posting.*
 
 A vision-language-action (VLA) policy can pass a manipulation benchmark without reading its instruction: replace the words with the string `xxx` and it emits the same actions. It succeeds by moving to the object that usually sits in that position, not by reading the name. On the one axis that separates the two — object identity, rename the target and keep the scene — the published field selects the correct object **0–1%** of the time.
 
@@ -21,7 +21,7 @@ report.nonsense      # collapses on a meaningless name?   (needs a real name)
 report.reach_probe   # every failure split motor vs grounding
 ```
 
-`swap-obey` is the load-bearing number: it converts a hollow "it failed" into "it obeyed the new name." A policy that rides a position shortcut scores at chance no matter how high its task success. *(Battery code lands with the arXiv release; the interface above is stable.)*
+`swap-obey` is the load-bearing number: it converts a hollow "it failed" into "it obeyed the new name." A policy that rides a position shortcut scores at chance no matter how high its task success. *(The harness ships in `galahad/`; the one-command `pip` interface above is the packaging in progress — the protocol and scorers are these scripts.)*
 
 ## Reproducing the paper
 
@@ -38,12 +38,10 @@ python experiments/conditioning_gradient.py   # text-cond ≫ action-cond ≫ im
 ## Layout
 
 ```
-galahad/        battery.py        # the grounding lie-detector (pip-installable)
-generator/                        # deconfounded data generators — one design per referent type
-experiments/                      # one script per paper figure/table
-paper/          main.tex          # manuscript (sources at repo root during active writing)
-                galahad_draft.pdf
-docs/           index.html        # project page (GitHub Pages)
+galahad/        # the battery harness: eval, serving, scorers, dual-output patch
+generator/      # deconfounded data generators — one design per referent type
+experiments/    # one runbook per paper artifact
+docs/           # project page (GitHub Pages)
 ```
 
 ## Release artifacts
