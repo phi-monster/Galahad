@@ -1,7 +1,7 @@
 # Galahad
 
 > **Galahad and the Siege Perilous: A Cheat-Proof Trial for Language Grounding, and the First Policy to Survive It**
-> **[Project page](https://xn--7xa.monster/Galahad/)** · Paper · **[Model](https://huggingface.co/phi-monster/Galahad)** · **[Datasets](https://huggingface.co/phi-monster)** — *paper link lands with the arXiv posting.*
+> **[Project page](https://xn--7xa.monster/Galahad/)** · **[Paper (PDF)](docs/static/galahad.pdf)** · **[Model](https://huggingface.co/phi-monster/Galahad)** · **[Datasets](https://huggingface.co/phi-monster)** — *arXiv id lands with the announcement.*
 
 A vision-language-action (VLA) policy can pass a manipulation benchmark without reading its instruction: replace the words with the string `xxx` and it emits the same actions. It succeeds by moving to the object that usually sits in that position, not by reading the name. On the one axis that separates the two — object identity, rename the target and keep the scene — the published field selects the correct object **0–1%** of the time.
 
