@@ -46,7 +46,7 @@ docs/           # project page (GitHub Pages)
 
 ## Release artifacts
 
-- **Model** — one merged checkpoint grounding seven referent-type axes in a single set of weights. The training code reproduces the dual-output (action + grounded future-prediction) experiment end-to-end.
+- **Model** — [one merged checkpoint](https://huggingface.co/phi-monster/Galahad) grounding seven referent-type axes in a single set of weights, and the [object-family dual-output checkpoint](https://huggingface.co/phi-monster/Galahad-object-unified) (action + grounded future-prediction), rebuilt from the released recipe and battery-verified.
 - **Dataset + generator** — the deconfounded referent-type sets in LeRobot format, and the generator that produces both the exam (the battery) and the medicine (the training set) from one principle.
 - **Battery** — the one-command grounding check above.
 - **Paper** — the manuscript and every figure script.
