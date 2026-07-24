@@ -3,29 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Galahad — A Cheat-Proof Trial for Language Grounding</title>
-  <meta name="description" content="Frontier robot policies pass benchmarks without reading the instruction. Galahad is the first policy to survive a change-one-word trial: rename the target and the arm goes to the newly named object (200/200), on less than $1,000 of GPU rental.">
+  <title>Instruction Blindness in VLA Policies — Galahad</title>
+  <meta name="description" content="Frontier robot policies pass benchmarks without reading the instruction — a failure we call instruction blindness, a measurable instance of causal confusion. We diagnose the mechanism and cure it with a data recipe: rename the target and Galahad's arm goes to the newly named object (200/200), from 13.5% to 94.5%.">
   <meta name="author" content="Yuchen Liu, Muchen Han">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="https://xn--7xa.monster/static/favicon.png">
   <link rel="stylesheet" href="style.css">
 
-  <meta property="og:title"        content="Galahad — A Cheat-Proof Trial for Language Grounding">
-  <meta property="og:description"  content="Change one word and the arm changes its mind. Every frontier policy fails this trial; Galahad survives it — for less than $1,000.">
+  <meta property="og:title"        content="Instruction Blindness in Vision–Language–Action Policies">
+  <meta property="og:description"  content="Change one word and the arm changes its mind. Frontier policies fail this counterfactual; a data recipe cures it — 13.5% → 94.5%.">
   <meta property="og:type"         content="website">
   <meta property="og:url"          content="https://xn--7xa.monster/Galahad/">
   <meta property="og:image"        content="https://xn--7xa.monster/Galahad/static/teaser.png">
   <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="Galahad — A Cheat-Proof Trial for Language Grounding">
-  <meta name="twitter:description" content="Change one word and the arm changes its mind. Every frontier policy fails this trial; Galahad survives it.">
+  <meta name="twitter:title"       content="Instruction Blindness in Vision–Language–Action Policies">
+  <meta name="twitter:description" content="Change one word and the arm changes its mind. Frontier policies fail this counterfactual; a data recipe cures it.">
   <meta name="twitter:image"       content="https://xn--7xa.monster/Galahad/static/teaser.png">
 </head>
 <body>
   <main>
 
     <header class="masthead">
-      <h1>Galahad and the Siege Perilous</h1>
-      <p class="subtitle">A cheat-proof trial for language grounding, and the first policy to survive it.</p>
+      <h1>Instruction Blindness in Vision&ndash;Language&ndash;Action Policies</h1>
+      <p class="subtitle">Diagnosis and a low-rank data cure. We release <strong>Galahad</strong>, the policy that validates it.</p>
       <p class="tagline">change one word &rarr; the arm changes its mind.</p>
 
       <nav class="links">
@@ -39,8 +39,8 @@
 
     <div class="authors">
       <p class="who"><strong>Yuchen Liu</strong><sup>*</sup> &nbsp; <strong>Muchen Han</strong><sup>*</sup></p>
-      <p class="aff"><a href="https://xn--7xa.monster">&Phi;(fight) Research</a></p>
-      <p class="eq"><sup>*</sup> Equal contribution &middot; correspondence: yuchen@&phi;.monster</p>
+      <p class="aff"><a href="https://xn--7xa.monster">&Phi;(fight) Research</a> &middot; HKUST</p>
+      <p class="eq"><sup>*</sup> Equal contribution &middot; correspondence: yuchen@&phi;.monster &middot; preprint, under review</p>
     </div>
 
     <!-- ===== the change-one-word teaser ===== -->
@@ -55,59 +55,61 @@
       </figure>
       <figure class="realrobot">
         <video src="static/realrobot_demo.mp4" autoplay loop muted playsinline controls></video>
-        <figcaption>The same recipe on a physical arm (LeKiwi-class, &#36;500 hardware; raw phone footage). Same
-          scene, two runs: name a different candy and the arm goes to it. The measured evidence table ships with
-          the release.</figcaption>
+        <figcaption>The same recipe on a low-cost SO-101-class arm (commodity servos, a single camera; raw phone
+          footage). Blank the cameras and the policy collapses to one instruction-independent attractor; with
+          vision on, the reach follows the named color &mdash; vision-gating verified on hardware.</figcaption>
       </figure>
     </section>
 
     <div class="numbers">
-      <div class="stat win"><div class="n">94.5%</div><div class="l">Galahad grounding</div></div>
+      <div class="stat win"><div class="n">94.5%</div><div class="l">cured grounding</div></div>
       <div class="stat"><div class="n">13.5%</div><div class="l">its base</div></div>
       <div class="stat"><div class="n">0&ndash;1%</div><div class="l">the field</div></div>
       <div class="stat win"><div class="n">200/200</div><div class="l">obeys the new name</div></div>
-      <div class="stat"><div class="n">&lt;&#36;1k</div><div class="l">total GPU rental</div></div>
+      <div class="stat"><div class="n">7 axes</div><div class="l">one set of weights</div></div>
     </div>
 
-    <h2>The finding</h2>
-    <p>A vision-language-action policy can pass a manipulation benchmark without reading its instruction: replace
-      the words with the string <code>xxx</code> and it emits the same actions. It succeeds by moving to the
-      object that usually sits in that position, not by reading the name. On the one axis that separates the two
-      &mdash; object identity, rename the target and keep the scene &mdash; the published field selects the correct
-      object <strong>0&ndash;1%</strong> of the time.</p>
+    <h2>Instruction blindness</h2>
+    <p>A vision&ndash;language&ndash;action policy can pass a manipulation benchmark without reading its
+      instruction: replace the words with the string <code>xxx</code> and it emits the same actions. It succeeds by
+      moving to the object that usually occupies the target position, not by resolving the name. We call this
+      failure mode <strong>instruction blindness</strong> and show it is a concrete instance of <em>causal
+      confusion</em> in imitation learning. On the one axis that separates a position shortcut from language
+      grounding &mdash; object identity, rename the target and keep the scene &mdash; the published field selects
+      the correct object <strong>0&ndash;1%</strong> of the time.</p>
 
-    <h2>The cure is data, not architecture</h2>
-    <p>We make the instruction the only predictor of the target: every object appears as the target and as a
-      distractor across randomized positions, so a position shortcut earns nothing and only reading the name pays.
-      We protect the pretrained grounding with a low-rank update &mdash; full fine-tuning on the identical data
-      <em>destroys</em> grounding (12.5%), and the low-rank cure installs it (<strong>94.5%</strong>). The released
-      weight is one merged checkpoint grounding seven referent-type axes at once: object identity, spatial, goal,
-      color, category, negation, composition (obey rate 75&ndash;99%, occlusion &le;2% on every axis). And on the
-      object family, one checkpoint's action <em>and</em> prediction of the future both obey the instruction
-      &mdash; the first verifiably grounded unified model.</p>
+    <h2>A severed route, not missing knowledge</h2>
+    <p>The pretrained backbone already resolves the named object in its language stream &mdash; a frozen probe
+      reads the binding, and injecting the word direction at an early layer flips the selected object 100% of the
+      time &mdash; but the action head routes position and never reads that binding. Because the knowledge is
+      present, the repair is a <strong>data recipe, not an architecture</strong>: make the instruction the only
+      predictor of the target, and protect the pretrained grounding with a low-rank update. Full fine-tuning on the
+      identical data <em>destroys</em> grounding (12.5%); the low-rank cure installs it (<strong>94.5%</strong>).
+      The released weight grounds seven referent-type axes in one set of weights &mdash; object identity, spatial,
+      goal, color, category, negation, composition (obey 75&ndash;99%, occlusion &le;2% on every axis).</p>
 
     <h2>Results</h2>
     <div class="teaser"><figure>
-      <img src="static/f2_main_battery.png" alt="object substitution: field 0-1%, base 13.5%, Galahad 94.5%">
-      <figcaption>Change the object's name; does the arm fetch it? Galahad reaches 94.5% where its base scores
+      <img src="static/f2_main_battery.png" alt="object substitution: field 0-1%, base 13.5%, cured 94.5%">
+      <figcaption>Change the object's name; does the arm fetch it? The cure reaches 94.5% where its base scores
         13.5% and the field 0&ndash;1%, obeying the new name 200/200 and never fetching the trained object.</figcaption>
-    </figure></div>
-    <div class="teaser"><figure>
-      <img src="static/f3_conditioning_gradient.png" alt="conditioning gradient: text-cond 71, action-cond 20-45, imitation 0-1">
-      <figcaption>One disease along one spectrum: grounding tracks how the instruction reaches the output.
-        Text-conditioned generation reads the name (65%), action-conditioned world models bottleneck it (20&ndash;45%),
-        imitation policies discard it (0&ndash;1%). Galahad grounds near 100%.</figcaption>
     </figure></div>
     <div class="teaser"><figure>
       <img src="static/f4_six_axes.png" alt="one adapter grounds six referent types">
       <figcaption>One adapter grounds six referent types at once (obey rate 77&ndash;95%); generality holds within
         trained coverage and a held-out type falls to chance.</figcaption>
     </figure></div>
+    <div class="teaser"><figure>
+      <img src="static/f3_conditioning_gradient.png" alt="conditioning gradient: text-cond 65-78, action-cond 20-45, imitation 0-1">
+      <figcaption>One disease along one spectrum: grounding tracks how the instruction reaches the output.
+        Text-conditioned generation reads the name (65&ndash;78%), action-conditioned world models bottleneck it
+        (20&ndash;45%), imitation policies discard it (0&ndash;1%).</figcaption>
+    </figure></div>
 
-    <h2 id="battery">Check any policy for the shortcut</h2>
-    <p>The core release is a one-command grounding lie-detector. It runs the same trial on <em>your</em> policy:
-      not a drop under perturbation, but a positive control &mdash; rename the target, and does the arm go to the
-      newly named object?</p>
+    <h2 id="battery">Measure the shortcut in any policy</h2>
+    <p>The measurement is a one-command counterfactual. It runs the same test on <em>your</em> policy: not a drop
+      under perturbation, but a positive control &mdash; rename the target, and does the arm go to the newly named
+      object?</p>
 <pre><code>from galahad.battery import run
 
 report = run(policy, suite="libero_object")
@@ -117,9 +119,9 @@ report.nonsense     # collapses on a meaningless name?  (needs a real name)</cod
     <p class="meta">The harness ships in the repo (<code>galahad/</code>); the one-command interface is the packaging in progress.</p>
 
     <h2>Cite</h2>
-<pre><code>@article{liu2026galahad,
-  title  = {Galahad and the Siege Perilous: A Cheat-Proof Trial for
-            Language Grounding, and the First Policy to Survive It},
+<pre><code>@misc{liu2026instructionblindness,
+  title  = {Instruction Blindness in Vision-Language-Action Policies:
+            Diagnosis and a Low-Rank Data Cure},
   author = {Liu, Yuchen and Han, Muchen},
   year   = {2026}
 }</code></pre>
