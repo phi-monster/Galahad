@@ -1,0 +1,51 @@
+# Galahad — Instruction Blindness in Vision-Language-Action Policies
+
+> A vision-language-action (VLA) policy can pass a manipulation benchmark without reading its
+> instruction. We name that failure mode "instruction blindness", show it is a measurable instance of
+> causal confusion in imitation learning, locate its mechanism, and cure it with a data recipe rather
+> than an architecture. Galahad is the released policy that validates the cure.
+
+## Paper
+
+- Title: Instruction Blindness in Vision-Language-Action Policies: Diagnosis and a Low-Rank Data Cure
+- Authors: Yuchen Liu, Muchen Han (Φ(fight) Research; HKUST)
+- PDF: https://xn--7xa.monster/Galahad/static/galahad.pdf
+- Project page: https://xn--7xa.monster/Galahad/
+- Status: preprint, under review
+
+## The finding
+
+Standard manipulation benchmarks place the named object where the policy expects it, so a position
+shortcut and genuine language grounding earn the same score. On the one axis that separates them —
+object identity, rename the target and keep the scene — published evaluations put the field at 0-1%
+correct object selection. Four open world-action models we ran reach 20-45%.
+
+## The mechanism
+
+The pretrained backbone resolves the named object in its language stream; the action head routes
+position and never reads that binding. No training-time regularizer on the confounded data reopens
+the route. Because the knowledge is present and only the routing is missing, the repair is a data
+recipe.
+
+## The cure
+
+Make the instruction the only predictor of the target (every object appears as target and as
+distractor across randomized positions), and protect the pretrained resolution with a low-rank
+update. Object-identity grounding goes from 13.5% to 94.5%; full fine-tuning on the identical
+demonstrations destroys it (12.5%). The cured policy obeys a renamed target on 200 of 200 trials and
+grounds seven referent-type axes in one set of weights.
+
+## Released artifacts
+
+- Model (7-axis merged weight): https://huggingface.co/phi-monster/Galahad
+- Model (object-family dual-output weight): https://huggingface.co/phi-monster/Galahad-object-unified
+- Deconfounded datasets and their generator: https://huggingface.co/phi-monster
+- Code, data generator, and the measurement battery: https://github.com/phi-monster/Galahad
+- License: Apache 2.0 (code and models), CC BY 4.0 (paper)
+
+## Terms defined here
+
+- instruction blindness: a policy that completes an instructed task without reading the instruction
+- swap-obey: rename the target, hold the scene fixed, and record whether the arm goes to the newly
+  named object — a positive control rather than a drop under perturbation
+- deconfounded data: demonstrations in which the instruction is the only variable predicting the target

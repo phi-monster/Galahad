@@ -19,6 +19,46 @@
   <meta name="twitter:title"       content="Instruction Blindness in Vision–Language–Action Policies">
   <meta name="twitter:description" content="Change one word and the arm changes its mind. Frontier policies fail this counterfactual; a data recipe cures it.">
   <meta name="twitter:image"       content="https://xn--7xa.monster/Galahad/static/teaser.png">
+  <!-- Google Scholar / academic indexing -->
+  <meta name="citation_title" content="Instruction Blindness in Vision-Language-Action Policies: Diagnosis and a Low-Rank Data Cure">
+  <meta name="citation_author" content="Liu, Yuchen">
+  <meta name="citation_author" content="Han, Muchen">
+  <meta name="citation_author_institution" content="Phi(fight) Research">
+  <meta name="citation_author_institution" content="The Hong Kong University of Science and Technology">
+  <meta name="citation_publication_date" content="2026/07">
+  <meta name="citation_pdf_url" content="https://xn--7xa.monster/Galahad/static/galahad.pdf">
+  <meta name="citation_abstract" content="A vision--language--action (VLA) policy can pass a manipulation benchmark without reading its instruction: replace the words with the string 'xxx' and it emits the same actions, moving to the object that usually occupies that position rather than resolving the name. Standard benchmarks cannot detect this, because they place the named object where the policy expects it, so a position shortcut and genuine language grounding earn the same score. We call this failure mode instruction blindness, and we measure it with a counterfactual that a position shortcut cannot pass: hold the pixels, the scene, and the robot pose fixed, change one word in the instruction, and record which object the arm reaches. Published evaluations put the field at 0--1% correct object selection on this axis, and four world-action models we ran reach 20--45%. We then locate the failure in the network. In behavior-cloning policies open enough to instrument, the backbone resolves the named object in its language stream—patching localizes the binding to a single head, and injecting the word direction flips the selected object—while the action head routes position and never reads that binding; on the policy we cure, no training-time regularizer on the confounded data reopens the route. Because the knowledge is present and only the routing is missing, the repair is a data recipe rather than an architecture: making the instruction the only predictor of the target, under a low-rank update that protects the pretrained resolution, takes object-identity grounding from 13.5% to 94.5%, where full fine-tuning on the identical demonstrations destroys it. The cured policy obeys a renamed target on 200 of 200 trials, grounds seven referent-type axes in one set of weights, and transfers to a second simulator. We release the policy, the deconfounded datasets and their generator, and the measurement code.">
+  <meta name="citation_keywords" content="vision-language-action; instruction following; language grounding; causal confusion; shortcut learning; robot manipulation; LoRA; counterfactual evaluation">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": "Instruction Blindness in Vision-Language-Action Policies: Diagnosis and a Low-Rank Data Cure",
+    "headline": "Instruction Blindness in Vision-Language-Action Policies",
+    "author": [
+      {"@type": "Person", "name": "Yuchen Liu", "affiliation": [
+        {"@type": "Organization", "name": "\u03a6(fight) Research"},
+        {"@type": "Organization", "name": "The Hong Kong University of Science and Technology"}]},
+      {"@type": "Person", "name": "Muchen Han", "affiliation": [
+        {"@type": "Organization", "name": "\u03a6(fight) Research"},
+        {"@type": "Organization", "name": "The Hong Kong University of Science and Technology"}]}
+    ],
+    "datePublished": "2026-07",
+    "url": "https://xn--7xa.monster/Galahad/",
+    "sameAs": ["https://github.com/phi-monster/Galahad", "https://huggingface.co/phi-monster/Galahad"],
+    "abstract": "A vision--language--action (VLA) policy can pass a manipulation benchmark without reading its instruction: replace the words with the string 'xxx' and it emits the same actions, moving to the object that usually occupies that position rather than resolving the name. Standard benchmarks cannot detect this, because they place the named object where the policy expects it, so a position shortcut and genuine language grounding earn the same score. We call this failure mode instruction blindness, and we measure it with a counterfactual that a position shortcut cannot pass: hold the pixels, the scene, and the robot pose fixed, change one word in the instruction, and record which object the arm reaches. Published evaluations put the field at 0--1% correct object selection on this axis, and four world-action models we ran reach 20--45%. We then locate the failure in the network. In behavior-cloning policies open enough to instrument, the backbone resolves the named object in its language stream—patching localizes the binding to a single head, and injecting the word direction flips the selected object—while the action head routes position and never reads that binding; on the policy we cure, no training-time regularizer on the confounded data reopens the route. Because the knowledge is present and only the routing is missing, the repair is a data recipe rather than an architecture: making the instruction the only predictor of the target, under a low-rank update that protects the pretrained resolution, takes object-identity grounding from 13.5% to 94.5%, where full fine-tuning on the identical demonstrations destroys it. The cured policy obeys a renamed target on 200 of 200 trials, grounds seven referent-type axes in one set of weights, and transfers to a second simulator. We release the policy, the deconfounded datasets and their generator, and the measurement code.",
+    "keywords": "vision-language-action, language grounding, causal confusion, shortcut learning, robot manipulation, LoRA",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "isAccessibleForFree": true,
+    "associatedMedia": [
+      {"@type": "SoftwareSourceCode", "name": "Galahad code, generator and measurement battery",
+       "codeRepository": "https://github.com/phi-monster/Galahad", "license": "https://www.apache.org/licenses/LICENSE-2.0"},
+      {"@type": "Dataset", "name": "Deconfounded referent-type datasets",
+       "url": "https://huggingface.co/phi-monster"}
+    ]
+  }
+  </script>
 </head>
 <body>
   <main>
